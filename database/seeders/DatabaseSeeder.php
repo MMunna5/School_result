@@ -1,0 +1,3 @@
+<?php
+namespace Database\Seeders;use Illuminate\Database\Seeder;use Illuminate\Support\Facades\DB;use Illuminate\Support\Facades\Hash;
+class DatabaseSeeder extends Seeder{public function run():void{if(DB::table('admins')->count()===0&&env('ADMIN_PASSWORD'))DB::table('admins')->insert(['username'=>env('ADMIN_USERNAME','admin'),'password'=>Hash::make(env('ADMIN_PASSWORD')),'role'=>'admin','active'=>1,'must_change_password'=>0,'created_at'=>now(),'updated_at'=>now()]);}}
