@@ -5,8 +5,7 @@
 <style>
 @page{size:A4 portrait;margin:0}
 html,body{width:210mm;height:297mm;margin:0;padding:0;background:#fff}
-body{font-family:DejaVu Sans,sans-serif;color:#111827}
-*{box-sizing:border-box}
+body{font-family:DejaVu Sans,sans-serif;color:#111827;font-size:11pt}\n*{box-sizing:border-box}
 .sheet{
     width:193mm;
     height:280mm;
