@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tabulation Sheet</title>
-    <link rel="icon" href="/6716-removebg-preview.png?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="/6716-removebg-preview.png?v=4">
     <link rel="stylesheet" href="/css/app.css">
     <style>@page { size: A4 landscape; margin: 8mm; }</style>
 </head>
