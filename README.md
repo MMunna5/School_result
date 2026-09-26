@@ -14,3 +14,7 @@ Laravel conversion of the original Node.js School Result System. The UI is prese
 4. Run `php artisan key:generate`.
 5. Run `php artisan migrate --seed`.
 6. Run `php artisan serve`.
+
+
+## Feature coverage
+Admin login, classes, subjects, exams, individual result entry/edit/publish, bulk Excel preview/import, public result search, reports, CSV/Excel export, backup, user management and audit endpoints are included in the Laravel port. The original frontend pages and styling are preserved in `resources/views` and `public`.
