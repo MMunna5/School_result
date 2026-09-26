@@ -39,7 +39,7 @@ body{font-family:DejaVu Sans,sans-serif;color:#111827;font-size:11pt}
 @php
 $logo=public_path('6716-removebg-preview.png');
 $signature=public_path('head-signature.png');
-$qrUrl='https://quickchart.io/qr?size=300&margin=1&text='.urlencode($data['verify_url']??'');
+$qrData=$data['qr_data']??null;
 $student=$data['student']; $school=$data['school']; $summary=$data['summary'];
 @endphp
 <div class="page">
@@ -66,7 +66,7 @@ $student=$data['student']; $school=$data['school']; $summary=$data['summary'];
 <td><div class="small">Result</div><div class="big">{{ $summary['result'] }}</div></td>
 <td><div class="small">Position</div><div class="big">{{ $summary['position'] ?? '-' }}</div></td>
 </tr></table>
-@if(!empty($data['verify_url']))<img class="qr" src="{{ $qrUrl }}" alt=""><div class="qrnote">Scan to verify this result</div>@endif
+@if(!empty($qrData))<img class="qr" src="{{ $qrData }}" alt=""><div class="qrnote">Scan to verify this result</div>@endif
 @if(is_file($signature))<img class="signature" src="data:image/png;base64,{{base64_encode(file_get_contents($signature))}}" alt="">@endif
 <div class="signline">Head Teacher</div>
 <p class="note">This is a computer generated marksheet. Its authenticity can be checked by scanning the QR code.</p>
