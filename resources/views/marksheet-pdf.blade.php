@@ -5,7 +5,7 @@
 <style>
 @page { size:595.28pt 841.89pt; margin:0; }
 html,body{margin:0;padding:0;width:595.28pt;height:841.89pt;background:#fff}
-body{font-family:DejaVu Sans,sans-serif;color:#111827;font-size:11pt}
+body{font-family:&#39;HindSiliguri',DejaVu Sans,sans-serif;color:#111827;font-size:11pt}@font-face{font-family:'HindSiliguri';font-style:normal;font-weight:400;src:url('{{ public_path('fonts/HindSiliguri-Regular.woff2') }}&#39;) format('woff2')}@font-face{font-family:'HindSiliguri';font-style:normal;font-weight:700;src:url('{{ public_path('fonts/HindSiliguri-Bold.woff2') }}') format('woff2')}
 *{box-sizing:border-box}
 .page{position:relative;width:595.28pt;height:841.89pt;background:#fff;overflow:hidden}
 .border1{position:absolute;left:24pt;top:24pt;width:547.28pt;height:793.89pt;border:2pt solid #1e3a8a}
@@ -21,7 +21,7 @@ body{font-family:DejaVu Sans,sans-serif;color:#111827;font-size:11pt}
 .info td{height:19pt;padding:0;font-size:11pt;line-height:19pt;white-space:nowrap;vertical-align:top}
 .info .label{width:84pt;color:#4b5563;font-weight:bold}
 .info .value{padding-left:4pt;width:173.64pt;color:#111827}
-.marks{position:absolute;left:40pt;top:297pt;width:515.28pt;border-collapse:collapse;table-layout:fixed}
+.marks{position:absolute;left:40pt;top:292pt;width:515.28pt;border-collapse:collapse;table-layout:fixed}
 .marks th,.marks td{height:21pt;padding:0 6pt;border:.5pt solid #9ca3af;font-size:10.5pt;line-height:21pt;vertical-align:middle}
 .marks th{background:#e5e7eb;font-weight:bold}
 .subject{width:200pt;text-align:left}.code{width:60pt;text-align:center}.full{width:70pt;text-align:center}.obtained{width:60pt;text-align:center}.grade{width:55pt;text-align:center}.point{width:70pt;text-align:center}
@@ -56,11 +56,12 @@ $student=$data['student']; $school=$data['school']; $summary=$data['summary'];
 <tr><td class="label">Registration:</td><td class="value">{{ $student->registration ?: '-' }}</td><td class="label">Class:</td><td class="value">{{ $student->class_name }}</td></tr>
 <tr><td class="label">Group:</td><td class="value">{{ $student->group_name ?: '-' }}</td><td class="label">Year:</td><td class="value">{{ $student->exam_year }}</td></tr>
 </table>
+@php $summaryTop = 292 + (count($data['subjects']) + 1) * 21 + 16; @endphp
 <table class="marks">
 <thead><tr><th class="subject">Subject</th><th class="code">Code</th><th class="full">Full Marks</th><th class="obtained">Marks</th><th class="grade">Grade</th><th class="point">Grade Point</th></tr></thead>
 <tbody>@foreach($data['subjects'] as $s)<tr><td class="subject">{{ $s->subject_name }}</td><td class="code">{{ $s->subject_code }}</td><td class="full">{{ $s->full_marks }}</td><td class="obtained">{{ $s->marks }}</td><td class="grade">{{ $s->grade }}</td><td class="point">{{ number_format((float)$s->grade_point,2) }}</td></tr>@endforeach</tbody>
 </table>
-<table class="summary"><tr>
+<table class="summary" style="top:{{ $summaryTop }}pt"><tr>
 <td><div class="small">Total Marks</div><div class="big">{{ $summary['total_marks'] }} / {{ $summary['total_full_marks'] }}</div></td>
 <td><div class="small">GPA</div><div class="big">{{ number_format((float)$summary['gpa'],2) }}</div></td>
 <td><div class="small">Result</div><div class="big">{{ $summary['result'] }}</div></td>
