@@ -7,8 +7,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/6716-removebg-preview.png?v=4">
     <link rel="stylesheet" href="/css/app.css">
 </head>
-<body class="min-h-screen bg-gradient-to-br from-brand-950 via-brand-800 to-brand-600">
-    <div class="mx-auto flex min-h-screen max-w-5xl flex-col px-4 py-8">
+<body class="relative min-h-screen overflow-hidden bg-gradient-to-br from-brand-950 via-brand-800 to-brand-600">
+    <div class="mesh-decor"></div>
+    <div class="relative mx-auto flex min-h-screen max-w-5xl flex-col px-4 py-8">
         <header class="flex items-center gap-3 text-white">
             <img src="/6716-removebg-preview.png?v=3" alt="School logo" class="h-12 w-12 rounded-full bg-white/90 object-contain p-0" onerror="this.style.display='none'">
             <div>

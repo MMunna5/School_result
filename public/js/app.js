@@ -89,7 +89,8 @@
         key: "M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z",
         check: "m4.5 12.75 6 6 9-13.5",
         external: "M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25",
-        pdf: "M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+        pdf: "M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z",
+        back: "M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
     };
     App.icon = function (name, cls) {
         return '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor" class="' +
@@ -209,6 +210,14 @@
                 }).join("");
         }).join("");
 
+        // breadcrumb trail: which group/item is currently active (display only)
+        let crumbGroup = "", crumbLabel = title;
+        NAV.some(function (g) {
+            const hit = g.items.filter(function (i) { return i.key === active; })[0];
+            if (hit) { crumbGroup = g.group; crumbLabel = hit.label; return true; }
+            return false;
+        });
+
         const shell = document.createElement("div");
         shell.className = "min-h-screen lg:flex";
         shell.innerHTML =
@@ -224,11 +233,18 @@
             '<a href="/pages/change-password.html" class="nav-link">' + App.icon("key") + "<span>Change password</span></a>" +
             '<button type="button" id="logout-btn" class="nav-link w-full text-left">' + App.icon("logout") + "<span>Logout</span></button></div></aside>" +
             '<div class="min-w-0 flex-1">' +
-            '<header class="no-print sticky top-0 z-20 flex h-14 items-center gap-3 border-b border-slate-200 bg-white/90 px-4 backdrop-blur">' +
+            '<header class="app-topbar no-print sticky top-0 z-20 flex h-14 items-center gap-3 border-b border-slate-200 bg-white/90 px-4 backdrop-blur">' +
             '<button type="button" id="menu-btn" class="rounded-lg p-2 text-slate-600 hover:bg-slate-100 lg:hidden" aria-label="Open menu">' + App.icon("menu") + "</button>" +
             '<h1 class="truncate text-base font-bold text-slate-900">' + App.esc(title) + "</h1>" +
-            '<div class="ml-auto flex items-center gap-2"><span class="hidden text-sm text-slate-500 sm:inline">' + App.esc(user.username) + "</span>" +
-            '<span class="' + (isAdmin ? "badge-blue" : "badge-gray") + '">' + (isAdmin ? "Admin" : "Teacher") + "</span></div></header>" +
+            '<div class="ml-auto flex items-center gap-3">' +
+            '<span class="user-chip-text"><span class="block text-sm font-semibold leading-tight text-slate-700">' + App.esc(user.username) + '</span>' +
+            '<span class="' + (isAdmin ? "badge-blue" : "badge-gray") + ' mt-1">' + (isAdmin ? "Admin" : "Teacher") + "</span></span>" +
+            '<span class="avatar-chip">' + App.esc(String(user.username || "?").trim().charAt(0).toUpperCase()) + "</span>" +
+            "</div></header>" +
+            (active === "dashboard" ? "" :
+                '<div class="crumbbar no-print sticky">' +
+                '<a href="/pages/admin.html" id="crumb-back" class="crumb-back">' + App.icon("back") + "<span>Back</span></a>" +
+                '<span class="crumb-trail">Dashboard' + (crumbGroup ? " / " + App.esc(crumbGroup) : "") + " / <b>" + App.esc(crumbLabel) + "</b></span></div>") +
             '<div id="slot" class="mx-auto max-w-7xl p-4 sm:p-6"></div></div>';
 
         document.body.insertBefore(shell, document.body.firstChild);
@@ -247,6 +263,15 @@
             await App.api("/api/admin/logout", { method: "POST", noRedirect: true });
             window.location.href = "/pages/admin-login.html";
         };
+        const crumbBack = document.getElementById("crumb-back");
+        if (crumbBack) {
+            crumbBack.onclick = function (e) {
+                if (window.history.length > 1 && document.referrer.indexOf(window.location.origin) === 0) {
+                    e.preventDefault();
+                    window.history.back();
+                }
+            };
+        }
         return user;
     };
 

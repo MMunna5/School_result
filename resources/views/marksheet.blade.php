@@ -122,11 +122,11 @@
     </style>
 </head>
 <body class="bg-slate-200 py-6 print:bg-white print:py-0">
-    <div class="no-print mx-auto mb-4 flex max-w-[820px] flex-wrap items-center justify-between gap-2 px-3">
-        <a href="/pages/result-search.html" class="text-sm font-semibold text-brand-700 hover:underline">&larr; Back</a>
+    <div class="no-print mx-auto mb-4 flex max-w-[820px] flex-wrap items-center justify-between gap-2 rounded-2xl bg-white px-4 py-3 shadow-soft">
+        <a href="/pages/result-search.html" class="btn-secondary btn-sm">&larr; Back to search</a>
         <div class="flex gap-2">
-            <a id="pdf-btn" href="#" class="btn-secondary hidden">Download PDF</a>
-            <button type="button" class="btn-primary" onclick="window.print()">Print marksheet</button>
+            <a id="pdf-btn" href="#" class="btn-secondary btn-sm hidden">Download PDF</a>
+            <button type="button" class="btn-primary btn-sm" onclick="window.print()">Print marksheet</button>
         </div>
     </div>
 
