@@ -246,7 +246,7 @@
                 '<a href="/pages/admin.html" id="crumb-back" class="crumb-back">' + App.icon("back") + "<span>Back</span></a>" +
                 '<span class="crumb-trail">Dashboard' + (crumbGroup ? " / " + App.esc(crumbGroup) : "") + " / <b>" + App.esc(crumbLabel) + "</b></span></div>") +
             '<div id="slot" class="mx-auto max-w-7xl p-4 sm:p-6"></div>' +
-            '<footer class="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500">Developed by <span class="font-semibold text-slate-700">Munna</span></footer></div>';
+            '<footer class="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500">Developed by <a href="https://github.com/MMunna5" target="_blank" rel="noopener noreferrer" class="font-semibold text-slate-700 hover:underline">Munna</a></footer></div>';
 
         document.body.insertBefore(shell, document.body.firstChild);
         document.getElementById("slot").appendChild(main);
