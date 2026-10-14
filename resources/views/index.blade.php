@@ -45,7 +45,7 @@
             </div>
         </main>
 
-        <footer class="text-center text-xs text-brand-200">&copy; <span id="year"></span> Shaheed Nur Hossain Memorial School</footer>
+        <footer class="text-center text-xs text-brand-200">&copy; <span id="year"></span> Shaheed Nur Hossain Memorial School · Developed by <span class="font-semibold text-white">Munna</span></footer>
     </div>
     <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
